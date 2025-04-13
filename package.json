@@ -4,8 +4,9 @@
   "description": "Convert animated SVGs to transparent GIF/APNG/MOV/WEBM using Puppeteer + FFmpeg",
   "license": "MIT",
   "bin": {
-    "svg-animation-convert": "./capture-frames.js"
+    "svg-animation-convert": "./svg-animation-convert.js"
   },
+  "module": "./svg-animation-convert.js",
   "type": "module",
   "engines": {
     "node": ">=18",
@@ -26,7 +27,7 @@
   "author": "Almog Baku",
   "repository": {
     "type": "git",
-    "url": "https://github.com/YOUR_USERNAME/svg-animation-convert"
+    "url": "https://github.com/AlmogBaku/svg-animation-convert"
   },
   "dependencies": {
     "node-html-parser": "^7.0.1",
