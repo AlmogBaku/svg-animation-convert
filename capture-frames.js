@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { launch } from "puppeteer";
 import { execSync } from "child_process";
 import { mkdirSync, rmSync, readFileSync } from "fs";
