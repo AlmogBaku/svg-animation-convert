@@ -1,6 +1,3 @@
-Here’s the updated script with `--keep-frames` support implemented:
-
-```js
 #!/usr/bin/env node
 import { launch } from "puppeteer";
 import { execSync } from "child_process";
@@ -158,4 +155,3 @@ const main = async () => {
 };
 
 main().catch(console.error);
-```
