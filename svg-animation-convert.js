@@ -1,3 +1,6 @@
+Here’s the updated script with `--keep-frames` support implemented:
+
+```js
 #!/usr/bin/env node
 import { launch } from "puppeteer";
 import { execSync } from "child_process";
@@ -9,7 +12,7 @@ import { parse } from "node-html-parser";
 const args = Object.fromEntries(
   process.argv.slice(2).map((arg) => {
     const [key, val] = arg.replace(/^--/, "").split("=");
-    return [key, val];
+    return [key, val ?? true];
   })
 );
 
@@ -17,20 +20,22 @@ const INPUT = args.input;
 const OUTPUT = args.output;
 const FPS = parseInt(args.fps || "24", 10);
 const FRAME_DIR = args.frames || "frames";
-const LOOP = parseInt(args.loop ?? "0", 10); // 0 = infinite, -1 = disabled
+const LOOP = parseInt(args.loop ?? "0", 10);
+const KEEP_FRAMES = args["keep-frames"];
 
 if (!INPUT || !OUTPUT) {
   console.log(`
 Usage:
-  svg-animation-convert --input=animation.svg --output=out.gif [--duration=4000] [--fps=24] [--loop=0] [--frames=frames]
+  svg-animation-convert --input=animation.svg --output=out.gif [--duration=4000] [--fps=24] [--loop=0] [--frames=frames] [--keep-frames]
 
 Options:
-  --input      Path to input SVG file (required)
-  --output     Output file path (required; must end in .gif, .apng, .mov, or .webm)
-  --duration   Animation duration in milliseconds (inferred from SVG if omitted)
-  --fps        Frames per second (default: 24)
-  --loop       Loop count (0 = infinite, -1 = no loop) [default: 0]
-  --frames     Temporary directory to store frames (default: frames)
+  --input        Path to input SVG file (required)
+  --output       Output file path (required; must end in .gif, .apng, .mov, or .webm)
+  --duration     Animation duration in milliseconds (inferred from SVG if omitted)
+  --fps          Frames per second (default: 24)
+  --loop         Loop count (0 = infinite, -1 = no loop) [default: 0]
+  --frames       Temporary directory to store frames (default: frames)
+  --keep-frames  If set, keeps the extracted PNG frames (optional)
 `);
   process.exit(1);
 }
@@ -145,8 +150,12 @@ const main = async () => {
       break;
   }
 
-  rmSync(FRAME_DIR, { recursive: true, force: true });
+  if (!KEEP_FRAMES) {
+    rmSync(FRAME_DIR, { recursive: true, force: true });
+  }
+
   console.log(`${FORMAT.toUpperCase()} saved as ${OUTPUT}`);
 };
 
 main().catch(console.error);
+```
