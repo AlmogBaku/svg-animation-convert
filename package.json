@@ -1,6 +1,6 @@
 {
   "name": "svg-animation-convert",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Convert animated SVGs to transparent GIF/APNG/MOV/WEBM using Puppeteer + FFmpeg",
   "license": "MIT",
   "bin": {
