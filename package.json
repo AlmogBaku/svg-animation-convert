@@ -30,6 +30,7 @@
     "url": "https://github.com/AlmogBaku/svg-animation-convert"
   },
   "dependencies": {
+    "minimist": "^1.2.8",
     "node-html-parser": "^7.0.1",
     "puppeteer": "^24.6.1"
   }
