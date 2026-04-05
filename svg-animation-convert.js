@@ -141,7 +141,7 @@ const main = async () => {
   const tmpHtml  = inputAbs.replace(/\.svg$/i, "") + "__svg_convert_tmp.html";
   writeFileSync(tmpHtml, [
     `<!DOCTYPE html><html><head>`,
-    `<style>*,html,body{margin:0;padding:0;background:transparent!important;overflow:hidden}</style>`,
+    `<style>html,body{margin:0;padding:0;background:transparent!important;overflow:hidden}*{margin:0;padding:0;box-sizing:border-box}</style>`,
     `</head><body>`,
     readFileSync(inputAbs, "utf8"),
     `</body></html>`,
